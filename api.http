@@ -1,0 +1,81 @@
+# # # Auth
+# # Register Auth
+# POST http://localhost:3000/api/v1/register
+# Content-Type: application/json
+
+# {
+#     "name": "lorem",
+#     "email": "loremipsum@dolorsit.amet",
+#     "address": "jln. lorem ipsum",
+#     "password": "loremipsum"
+# }
+
+# Login Auth
+# POST http://localhost:3000/api/v1/login
+# Content-Type: application/json
+
+# {
+#     "email": "loremipsum@dolorsit.amet",
+#     "password": "loremipsum"
+# }
+
+# # Who Am I Auth
+# GET http://localhost:3000/api/v1/whoami
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTMsIm5hbWUiOiJsb3JlbSIsImVtYWlsIjoibG9yZW1pcHN1bUBkb2xvcnNpdC5hbWV0IiwiaWF0IjoxNzEzNTU0MDY2fQ.rTOShsTahre6ZH0EVjIXOpLjip-sin-EGQWlSZ9Y4a0
+
+# # # Users
+# # Endpoint GET All Users
+# GET http://localhost:3000/api/v1/users
+# Content-Type: application/json
+
+# # Endpoint GET Users
+# GET http://localhost:3000/api/v1/users/1
+# Content-Type: application/json
+
+# # Endpoint Create Users
+# POST http://localhost:3000/api/v1/users
+# Content-Type: application/json
+
+# {
+#     "name": "rfn",
+#     "email": "rayanirmala@gmail.com",
+#     "address": "jln. anggrek loka",
+#     "password": "nirmalaraya"
+# }
+
+# # # Account
+# # Endpoint GET All Account
+# GET http://localhost:3000/api/v1/accounts
+# Content-Type: application/json
+
+# # Endpoint GET Account
+# GET http://localhost:3000/api/v1/accounts/1
+# Content-Type: application/json
+
+# # Endpoint Create Account
+# POST http://localhost:3000/api/v1/accounts
+# Content-Type: application/json
+
+# {
+#     "id": 3,
+#     "bank": "mandiri"
+# }
+
+# # # Transaction
+# # Endpoint GET All Transaction
+# GET http://localhost:3000/api/v1/transactions
+# Content-Type: application/json
+
+# # Endpoint GET Transaction
+# GET http://localhost:3000/api/v1/transactions/1
+# Content-Type: application/json
+
+# # Endpoint Create Transaction
+# POST http://localhost:3000/api/v1/transactions
+# Content-Type: application/json
+
+# {
+#     "source": 2,
+#     "destination": 1,
+#     "amount": 190000
+# }

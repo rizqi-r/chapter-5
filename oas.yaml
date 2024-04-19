@@ -1,0 +1,791 @@
+openapi: 3.0.1
+info:
+  title: Basic Banking System
+  version: 1.0.0
+  description: Dummy API
+  contact:
+    email: rizqi@test.com
+servers:
+  - url: http://localhost:3000/api/v1
+paths:
+  /register:
+    post:
+      tags:
+        - "auth"
+      summary: Register user
+      description: Memasukan user kedalam system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: lorem
+                email:
+                  type: string
+                  example: loremipsum@dolorsit.amet
+                address:
+                  type: string
+                  example: jln. lorem ipsum
+                password:
+                  type: string
+                  example: loremipsum
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 201
+                  message:
+                    type: string
+                    example: Created
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      name:
+                        type: string
+                        example: lorem
+                      email:
+                        type: string
+                        example: loremipsum@dolorsit.amet
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 400
+                  message:
+                    type: string
+                    example: Bad Request
+  /login:
+    post:
+      tags:
+        - "auth"
+      summary: Login user
+      description: User masuk kedalam system untuk mendapatkan token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: loremipsum@dolorsit.amet
+                password:
+                  type: string
+                  example: loremipsum
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: OK
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      name:
+                        type: string
+                        example: lorem
+                      email:
+                        type: string
+                        example: loremipsum@dolorsit.amet
+                      token:
+                        type: string
+                        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTMsIm5hbWUiOiJsb3JlbSIsImVtYWlsIjoibG9yZW1pcHN1bUBkb2xvcnNpdC5hbWV0IiwiaWF0IjoxNzEzNTU2ODU3fQ.SdLGzz2RiQ9b-RLsMH4vrPeupvsvmAzpRAEpWIisBg4
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 400
+                  message:
+                    type: string
+                    example: Bad Request
+  /whoami:
+    get:
+      tags:
+        - "auth"
+      summary: Who am i
+      description: Mendapatkan info user melalui token dari login
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: OK
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      name:
+                        type: string
+                        example: lorem
+                      email:
+                        type: string
+                        example: loremipsum@dolorsit.amet
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 400
+                  message:
+                    type: string
+                    example: Bad Request
+  /users:
+    get:
+      tags:
+        - "users"
+      summary: GET all users
+      description: mendapatkan semua info users
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: Created
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        email:
+                          type: string
+                      example:
+                        - id: 1
+                          name: rfn
+                          email: rayanirmala@gmail.com
+                        - id: 2
+                          name: test
+                          email: test@gmail.com
+    post:
+      tags:
+        - "users"
+      summary: Create user data
+      description: mendaftarkan user baru kedalam system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: rfn
+                email:
+                  type: string
+                  example: rayanirmala@gmail.com
+                address:
+                  type: string
+                  example: jln. anggrek loka
+                password:
+                  type: string
+                  example: rfn
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 201
+                  message:
+                    type: string
+                    example: Created
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      name:
+                        type: string
+                        example: rfn
+                      email:
+                        type: string
+                        example: rayanirmala@gmail.com
+        403:
+          description: "Forbidden"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 403
+                  message:
+                    type: string
+                    example: Forbidden
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 400
+                  message:
+                    type: string
+                    example: Bad Request
+  /users/{id}:
+    get:
+      tags:
+        - "users"
+      parameters:
+        - schema:
+            type: string
+            example: 1
+          name: id
+          in: path
+          required: true
+      summary: GET specific user
+      description: melihat detail user
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: OK
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      name:
+                        type: string
+                        example: rfn
+                      email:
+                        type: string
+                        example: rayanirmala@gmail.com
+                      profile:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                            example: 1
+                          identity_type:
+                            type: string
+                            example: KTP
+                          identity_number:
+                            type: number
+                            example: 4229526
+                          address:
+                            type: string
+                            example: jln. anggrek loka
+                          user_id:
+                            type: number
+                            example: 1
+        404:
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 404
+                  message:
+                    type: string
+                    example: Not Found
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 400
+                  message:
+                    type: string
+                    example: Bad Request
+  /accounts:
+    get:
+      tags:
+        - "accounts"
+      summary: GET all accounts
+      description: mendapatkan semua info accounts
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: Created
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        bank_name:
+                          type: string
+                        bank_account_number:
+                          type: string
+                        balance:
+                          type: number
+                        user_id:
+                          type: number
+                      example:
+                        - id: 1
+                          bank_name: bri
+                          bank_account_number: 78591921
+                          balance: 80000
+                          user_id: 1
+                        - id: 2
+                          bank_name: mandiri
+                          bank_account_number: 85002205
+                          balance: 120000
+                          user_id: 2
+                        - id: 3
+                          bank_name: bni
+                          bank_account_number: 76974747
+                          balance: 100000
+                          user_id: 2
+                        - id: 4
+                          bank_name: bca
+                          bank_account_number: 67333115
+                          balance: 100000
+                          user_id: 1
+                        - id: 5
+                          bank_name: bca
+                          bank_account_number: 40054463
+                          balance: 100000
+                          user_id: 2
+    post:
+      tags:
+        - "accounts"
+      summary: Create accounts data
+      description: mendaftarkan accounts baru kedalam system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: 1
+                bank:
+                  type: string
+                  example: bca
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 201
+                  message:
+                    type: string
+                    example: Created
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 5
+                      bank_name:
+                        type: string
+                        example: bca
+                      bank_account_number:
+                        type: number
+                        example: 40054463
+                      balance:
+                        type: number
+                        example: 100000
+                      user_id:
+                        type: number
+                        example: 1
+        404:
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 404
+                  message:
+                    type: string
+                    example: Not Found
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 400
+                  message:
+                    type: string
+                    example: Bad Request
+  /accounts/{id}:
+    get:
+      tags:
+        - "accounts"
+      parameters:
+        - schema:
+            type: string
+            example: 1
+          name: id
+          in: path
+          required: true
+      summary: GET specific accounts
+      description: melihat detail accounts
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: OK
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      bank_name:
+                        type: string
+                        example: bri
+                      bank_account_number:
+                        type: number
+                        example: 78591921
+                      balance:
+                        type: number
+                        example: 80000
+                      user_id:
+                        type: number
+                        example: 1
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 400
+                  message:
+                    type: string
+                    example: Bad Request
+        404:
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 404
+                  message:
+                    type: string
+                    example: Not Found
+  /transactions:
+    get:
+      tags:
+        - "transactions"
+      summary: GET all transactions
+      description: mendapatkan semua info transactions
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: Created
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        source_account_id:
+                          type: number
+                        destination_account_id:
+                          type: number
+                        amount:
+                          type: number
+                      example:
+                        - id: 1
+                          source_account_id: 1
+                          destination_account_id: 2
+                          amount: 10000
+    post:
+      tags:
+        - "transactions"
+      summary: Create transactions data
+      description: mendaftarkan transactions baru kedalam system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: number
+                  example: 1
+                destination:
+                  type: number
+                  example: 2
+                amount:
+                  type: number
+                  example: 10000
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 201
+                  message:
+                    type: string
+                    example: Created
+        404:
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 404
+                  message:
+                    type: string
+                    example: Not Found
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 400
+                  message:
+                    type: string
+                    example: Bad Request
+  /transactions/{id}:
+    get:
+      tags:
+        - "transactions"
+      parameters:
+        - schema:
+            type: string
+            example: 1
+          name: id
+          in: path
+          required: true
+      summary: GET specific transactions
+      description: melihat detail transactions
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200
+                  message:
+                    type: string
+                    example: OK
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                      source_account_id:
+                        type: number
+                        example: 1
+                      destination_account_id:
+                        type: number
+                        example: 2
+                      amount:
+                        type: number
+                        example: 10000
+                      destination_account_transaction:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                            example: 2
+                          bank_name:
+                            type: string
+                            example: mandiri
+                          bank_account_number:
+                            type: number
+                            example: 85002205
+                          balance:
+                            type: number
+                            example: 120000
+                          user_id:
+                            type: number
+                            example: 2
+                      source_account_transaction:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                            example: 1
+                          bank_name:
+                            type: string
+                            example: bri
+                          bank_account_number:
+                            type: number
+                            example: 78591921
+                          balance:
+                            type: number
+                            example: 80000
+                          user_id:
+                            type: number
+                            example: 1
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 400
+                  message:
+                    type: string
+                    example: Bad Request
+        404:
+          description: "Not Found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 404
+                  message:
+                    type: string
+                    example: Not Found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
